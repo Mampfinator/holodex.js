@@ -5,3 +5,4 @@ export * from './params';
 export * from './raw';
 export * from './song';
 export * from './video';
+export * from './org';

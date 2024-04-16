@@ -11,6 +11,8 @@ import {
   VideoRaw,
   VideoSearchType,
   VideosParam,
+  Org,
+  OrgRaw,
 } from './types';
 
 function querystring(obj: Record<string, any>): string {
@@ -186,5 +188,28 @@ export class HolodexApiClient {
     });
     const { data } = await this.httpClient.get<VideoRaw[]>(`/videos?${q}`);
     return data.map((video) => new Video(video));
+  }
+
+  /**
+   * Retrieve all available organizations.
+   *
+   * This is a **static** endpoint, and therefore doesn't need an API key.
+   * This method is also available as an instance method.
+   */
+  static async getOrgs() {
+    const { data } = await axios.get<OrgRaw[]>(
+      'https://holodex.net/statics/orgs.json',
+    );
+    return data.map((org) => new Org(org));
+  }
+
+  /**
+   * Retrieve all available organizations.
+   *
+   * This is a **static** endpoint, and therefore doesn't need an API key.
+   * This method is also available as a static method.
+   */
+  async getOrgs() {
+    return HolodexApiClient.getOrgs();
   }
 }

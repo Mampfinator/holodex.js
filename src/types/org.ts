@@ -1,3 +1,5 @@
+import { OrgRaw } from './raw/org-raw';
+
 /**
  * Derived from https://github.com/RiceCakess/Holodex
  *  MIT License
@@ -39,3 +41,23 @@ export const ORGS = Object.freeze({
   'unreal-night-girls': 'Unreal Night Girls',
   'v-dimension.creators': 'V Dimension.Creators',
 });
+
+export class Org {
+  public toRaw() {
+    return this.raw;
+  }
+
+  public get name() {
+    return this.raw.name;
+  }
+
+  public get short() {
+    return this.raw.short ?? undefined;
+  }
+
+  public get jpName() {
+    return this.raw.name_jp ?? undefined;
+  }
+
+  constructor(private readonly raw: OrgRaw) {}
+}
